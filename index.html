@@ -1,1118 +1,196 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huy ♡ Tuyền</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Great+Vibes&family=Lora:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<title>Kỷ Niệm Tình Yêu</title>
+
 <style>
-:root {
-  --crimson: #8b0000;
-  --rose: #c0392b;
-  --blush: #e8a0a0;
-  --petal: #f4c2c2;
-  --cream: #fff8f0;
-  --gold: #c9a84c;
-  --gold-light: #f0d080;
-  --dark: #1a0808;
-  --paper: #2a1010;
-  --wax: #3d1515;
+
+body{
+margin:0;
+font-family: "Segoe UI",sans-serif;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#ffd1ff);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+overflow:hidden;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--dark);
-  color: var(--cream);
-  font-family: 'Lora', serif;
-  overflow-x: hidden;
-  cursor: none;
+.container{
+text-align:center;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+padding:40px;
+border-radius:25px;
+box-shadow:0 10px 40px rgba(0,0,0,0.25);
+max-width:800px;
 }
 
-/* ── CURSOR ── */
-#cur { width: 22px; height: 22px; border: 2px solid var(--blush); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.08s; mix-blend-mode: screen; }
-#curdot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
-
-/* ── BACKGROUND TEXTURE ── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,0,0,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(100,0,0,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 50%, rgba(80,0,0,0.1) 0%, transparent 50%);
-  pointer-events: none; z-index: 0;
+h1{
+font-size:40px;
+margin-bottom:10px;
 }
 
-/* ── CANVASES ── */
-#roseCanvas, #fireworkCanvas {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-}
-#roseCanvas { z-index: 1; }
-#fireworkCanvas { z-index: 60; opacity: 0; transition: opacity 0.5s; }
-
-/* ── CANDLES ── */
-.candle-row {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  display: flex; justify-content: space-around;
-  align-items: flex-end; padding: 0 5%;
-  z-index: 2; pointer-events: none;
-}
-.candle { display: flex; flex-direction: column; align-items: center; }
-.candle-body {
-  width: 14px;
-  background: linear-gradient(180deg, #f5e6d0 0%, #e8d0b0 50%, #d4b890 100%);
-  border-radius: 3px 3px 2px 2px;
-  position: relative;
-  box-shadow: inset -3px 0 6px rgba(0,0,0,0.2);
-}
-.candle-wick {
-  width: 1.5px; height: 10px;
-  background: #333;
-  margin-bottom: -1px;
-  border-radius: 1px;
-}
-.candle-flame {
-  width: 12px; height: 18px;
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-}
-.flame-inner {
-  width: 7px; height: 14px;
-  background: radial-gradient(ellipse at 50% 80%, #fff 0%, #ffe066 20%, #ff9900 60%, rgba(200,50,0,0) 100%);
-  border-radius: 50% 50% 30% 30%;
-  animation: flicker 1.5s ease-in-out infinite alternate;
-  filter: blur(0.5px);
-}
-.flame-outer {
-  position: absolute;
-  width: 12px; height: 20px;
-  background: radial-gradient(ellipse at 50% 90%, rgba(255,140,0,0.4) 0%, transparent 70%);
-  border-radius: 50% 50% 30% 30%;
-  animation: flicker2 2s ease-in-out infinite alternate;
-  filter: blur(3px);
-}
-.candle-glow {
-  position: absolute;
-  width: 40px; height: 40px;
-  background: radial-gradient(circle, rgba(255,180,50,0.3) 0%, transparent 70%);
-  border-radius: 50%;
-  top: -10px; left: -14px;
-  animation: glowPulse 2s ease infinite alternate;
-}
-@keyframes flicker {
-  0% { transform: scaleX(1) scaleY(1) rotate(-1deg); }
-  100% { transform: scaleX(0.9) scaleY(1.05) rotate(1deg); }
-}
-@keyframes flicker2 {
-  0% { transform: scaleX(1.1) scaleY(0.95); opacity: 0.8; }
-  100% { transform: scaleX(0.85) scaleY(1.1); opacity: 1; }
-}
-@keyframes glowPulse {
-  0% { opacity: 0.5; transform: scale(1); }
-  100% { opacity: 1; transform: scale(1.3); }
+.time{
+font-size:22px;
+margin-top:15px;
 }
 
-/* ── SECTIONS ── */
-section {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  position: relative; z-index: 3;
-  padding: 80px 20px;
+.counter{
+font-size:50px;
+font-weight:bold;
+margin:20px 0;
 }
 
-/* ── DIVIDERS ── */
-.divider {
-  display: flex; align-items: center; gap: 16px;
-  margin: 30px 0;
-}
-.divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); max-width: 120px; }
-.divider-rose { font-size: 1.3rem; }
-
-/* ── HERO ── */
-#hero { text-align: center; }
-.hero-eyebrow {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  color: var(--blush);
-  letter-spacing: 3px;
-  opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
-}
-.hero-main {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(4rem, 14vw, 9rem);
-  line-height: 1;
-  background: linear-gradient(135deg, #fff5f5 0%, var(--petal) 30%, var(--gold-light) 60%, var(--blush) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  filter: drop-shadow(0 0 40px rgba(192,57,43,0.4));
-  opacity: 0; animation: fadeUp 1.4s ease 0.5s forwards;
-}
-.hero-amp {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: clamp(2rem, 6vw, 5rem);
-  color: var(--rose);
-  display: block;
-  opacity: 0; animation: fadeUp 1.2s ease 0.8s forwards;
-}
-.hero-heart-line {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  opacity: 0; animation: fadeUp 1s ease 1s forwards;
-  display: flex; align-items: center; justify-content: center; gap: 20px;
-}
-.big-heart {
-  display: inline-block;
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
-  animation: heartbeat 2s ease infinite;
-  filter: drop-shadow(0 0 20px rgba(192,57,43,0.8));
-}
-.hero-since {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: clamp(0.85rem, 2vw, 1.15rem);
-  color: rgba(255,240,240,0.5);
-  letter-spacing: 8px; text-transform: uppercase;
-  margin-top: 20px;
-  opacity: 0; animation: fadeUp 1s ease 1.2s forwards;
-}
-.hero-cta {
-  margin-top: 40px;
-  opacity: 0; animation: fadeUp 1s ease 1.5s forwards;
-  display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;
-}
-.btn-classic {
-  background: transparent;
-  border: 1px solid rgba(201,168,76,0.5);
-  color: var(--gold-light);
-  padding: 13px 28px;
-  border-radius: 2px;
-  font-family: 'Lora', serif; font-style: italic; font-size: 0.95rem;
-  cursor: pointer; letter-spacing: 2px;
-  transition: all 0.3s ease;
-  position: relative; overflow: hidden;
-}
-.btn-classic::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(139,0,0,0), rgba(139,0,0,0.3));
-  opacity: 0; transition: opacity 0.3s ease;
-}
-.btn-classic:hover { border-color: var(--gold); color: white; }
-.btn-classic:hover::before { opacity: 1; }
-
-/* ── CORNER ORNAMENTS ── */
-.corner-ornament {
-  position: absolute;
-  font-size: 1.5rem;
-  color: rgba(201,168,76,0.25);
-  pointer-events: none;
-}
-.corner-ornament.tl { top: 20px; left: 20px; }
-.corner-ornament.tr { top: 20px; right: 20px; transform: scaleX(-1); }
-.corner-ornament.bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
-.corner-ornament.br { bottom: 20px; right: 20px; transform: scale(-1); }
-
-/* ── COUNTER ── */
-#counter {
-  background: radial-gradient(ellipse at 50% 50%, rgba(139,0,0,0.1) 0%, transparent 70%);
-}
-.section-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  color: var(--gold-light);
-  text-align: center;
-  opacity: 0; transform: translateY(20px);
-  transition: all 0.8s ease;
-  text-shadow: 0 0 30px rgba(201,168,76,0.3);
-}
-.counter-wrap { max-width: 700px; width: 100%; }
-.counter-grid {
-  display: flex; flex-wrap: wrap; gap: 16px;
-  justify-content: center; margin-top: 40px;
-}
-.c-box {
-  min-width: 100px;
-  background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(139,0,0,0.08) 100%);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 4px;
-  padding: 24px 20px 18px;
-  text-align: center;
-  position: relative;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-.c-box::before {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 40%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-.c-box:hover { box-shadow: 0 0 30px rgba(139,0,0,0.2), 0 0 0 1px rgba(201,168,76,0.3); transform: translateY(-4px) !important; }
-.c-num {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 6vw, 3.5rem);
-  background: linear-gradient(180deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1; font-weight: 700;
-}
-.c-lbl {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: 0.8rem; color: rgba(255,220,200,0.5);
-  margin-top: 8px; letter-spacing: 2px; text-transform: uppercase;
-}
-.counter-message {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
-  color: var(--blush);
-  text-align: center;
-  margin-top: 30px;
-  opacity: 0; transition: opacity 1s ease 0.5s;
+.gallery{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:20px;
+flex-wrap:wrap;
 }
 
-/* ── LETTER ── */
-#letter {
-  background: radial-gradient(ellipse at 30% 50%, rgba(139,0,0,0.08) 0%, transparent 60%);
-}
-.letter-frame {
-  max-width: 660px; width: 100%;
-  position: relative;
-  opacity: 0; transform: translateY(30px);
-  transition: all 1s ease;
-}
-.letter-paper {
-  background: linear-gradient(160deg, rgba(42,16,16,0.95) 0%, rgba(28,8,8,0.98) 100%);
-  border: 1px solid rgba(201,168,76,0.25);
-  padding: clamp(30px, 6vw, 60px);
-  position: relative;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,0.5),
-    inset 0 0 80px rgba(139,0,0,0.04),
-    0 0 0 1px rgba(255,255,255,0.03) inset;
-}
-.letter-paper::before {
-  content: ''; position: absolute; inset: 8px;
-  border: 1px solid rgba(201,168,76,0.1);
-  pointer-events: none;
-}
-.letter-paper::after {
-  content: '🌹';
-  position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px rgba(192,57,43,0.6));
-}
-.letter-heading {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  color: var(--gold-light);
-  text-align: center; margin-bottom: 8px;
-}
-.letter-to {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: 1rem; color: var(--blush);
-  text-align: center; margin-bottom: 30px;
-  letter-spacing: 2px;
-}
-.letter-text {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  line-height: 2.1;
-  color: rgba(255,240,235,0.8);
-  text-align: justify;
-}
-.letter-text p + p { margin-top: 20px; }
-.letter-text .initial {
-  float: left; font-family: 'Playfair Display', serif; font-style: normal;
-  font-size: 3.5rem; line-height: 0.7; color: var(--rose);
-  margin-right: 8px; margin-top: 6px;
-  filter: drop-shadow(0 0 10px rgba(192,57,43,0.5));
-}
-.letter-sign {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  color: var(--rose);
-  text-align: right;
-  margin-top: 35px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(201,168,76,0.15);
-}
-.letter-wax {
-  text-align: center; margin-top: 20px; font-size: 1.8rem;
-  filter: drop-shadow(0 0 8px rgba(192,57,43,0.5));
+.gallery img{
+width:140px;
+height:140px;
+object-fit:cover;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+transition:0.3s;
 }
 
-/* ── GALLERY ── */
-#gallery {
-  background: radial-gradient(ellipse at 70% 40%, rgba(139,0,0,0.08) 0%, transparent 60%);
-}
-.gallery-container { max-width: 900px; width: 100%; }
-.gallery-stage {
-  position: relative; overflow: hidden;
-  border: 1px solid rgba(201,168,76,0.2);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
-}
-.gallery-track {
-  display: flex;
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.gallery-slide {
-  min-width: 100%;
-  height: clamp(280px, 50vw, 480px);
-  position: relative; overflow: hidden;
-  flex-shrink: 0;
-}
-.gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
-.gallery-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 15px;
-}
-.ph-bg-1 { background: linear-gradient(135deg, #2a0808 0%, #4a1010 50%, #2a0808 100%); }
-.ph-bg-2 { background: linear-gradient(135deg, #1a0810 0%, #3a0820 50%, #1a0a0a 100%); }
-.ph-bg-3 { background: linear-gradient(135deg, #0a0a1a 0%, #2a0818 50%, #1a0808 100%); }
-.ph-bg-4 { background: linear-gradient(135deg, #1a0808 0%, #3a1208 50%, #2a0a08 100%); }
-.ph-bg-5 { background: linear-gradient(135deg, #0a1010 0%, #1a0818 50%, #2a0808 100%); }
-.ph-icon { font-size: 4rem; opacity: 0.35; }
-.ph-label {
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.4rem; color: rgba(255,200,200,0.35);
-  text-align: center; padding: 0 20px;
-}
-.gallery-caption {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(10,0,0,0.85));
-  padding: 40px 25px 20px;
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.5rem; color: var(--petal);
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-.gallery-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  display: flex; justify-content: space-between;
-  width: 100%; padding: 0 15px; pointer-events: none;
-}
-.g-btn {
-  width: 48px; height: 48px;
-  background: rgba(10,0,0,0.7);
-  border: 1px solid rgba(201,168,76,0.3);
-  color: var(--gold-light); font-size: 1.3rem;
-  cursor: pointer; pointer-events: all;
-  transition: all 0.3s ease;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(10px);
-}
-.g-btn:hover { background: rgba(139,0,0,0.6); border-color: var(--gold); }
-.gallery-dots {
-  display: flex; gap: 10px; justify-content: center;
-  margin-top: 18px;
-}
-.g-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(201,168,76,0.3);
-  cursor: pointer; transition: all 0.3s ease;
-}
-.g-dot.active { background: var(--rose); width: 20px; border-radius: 3px; border-color: var(--rose); }
-.gallery-firework-btn {
-  display: flex; align-items: center; gap: 10px;
-  margin-top: 25px;
-  background: transparent;
-  border: 1px solid rgba(139,0,0,0.5);
-  color: var(--blush); padding: 12px 24px;
-  font-family: 'Great Vibes', cursive; font-size: 1.3rem;
-  cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;
-}
-.gallery-firework-btn:hover {
-  background: rgba(139,0,0,0.2);
-  border-color: var(--rose);
-  color: var(--petal);
-  box-shadow: 0 0 20px rgba(139,0,0,0.3);
+.gallery img:hover{
+transform:scale(1.1);
 }
 
-/* ── MUSIC PLAYER ── */
-.music-player {
-  position: fixed; bottom: 30px; left: 30px;
-  z-index: 100; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-}
-.music-btn {
-  width: 52px; height: 52px;
-  background: rgba(10,0,0,0.85);
-  border: 1px solid rgba(201,168,76,0.4);
-  border-radius: 50%;
-  color: var(--gold);
-  font-size: 1.3rem; cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 20px rgba(201,168,76,0.1);
-}
-.music-btn:hover, .music-btn.on { border-color: var(--gold); box-shadow: 0 0 25px rgba(201,168,76,0.3); }
-.music-btn.on { animation: goldPulse 2s ease infinite; color: var(--gold-light); }
-.music-bar {
-  background: rgba(10,0,0,0.85);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 2px;
-  padding: 8px 14px;
-  font-family: 'Lora', serif; font-style: italic; font-size: 0.8rem;
-  color: var(--gold);
-  white-space: nowrap;
-  transform: translateX(-20px); opacity: 0;
-  transition: all 0.4s ease;
-  backdrop-filter: blur(10px);
-  display: flex; align-items: center; gap: 8px;
-}
-.music-bar.show { transform: translateX(0); opacity: 1; }
-.music-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
-.music-bar-line {
-  width: 3px; background: var(--gold);
-  border-radius: 1px;
-  animation: musicBar 0.8s ease infinite alternate;
-}
-.music-bar-line:nth-child(1) { height: 5px; animation-delay: 0s; }
-.music-bar-line:nth-child(2) { height: 12px; animation-delay: 0.15s; }
-.music-bar-line:nth-child(3) { height: 8px; animation-delay: 0.3s; }
-.music-bar-line:nth-child(4) { height: 14px; animation-delay: 0.1s; }
-.music-bar-line:nth-child(5) { height: 6px; animation-delay: 0.25s; }
-@keyframes musicBar { from { transform: scaleY(0.3); } to { transform: scaleY(1); } }
-@keyframes goldPulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(201,168,76,0.2); }
-  50% { box-shadow: 0 0 35px rgba(201,168,76,0.5); }
+button{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:white;
+color:#ff4f81;
+font-weight:bold;
+cursor:pointer;
 }
 
-/* ── NAV DOTS ── */
-.nav-dots {
-  position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 14px; z-index: 100;
-}
-.ndot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(201,168,76,0.3);
-  cursor: pointer; transition: all 0.3s ease;
-}
-.ndot.active { background: var(--gold); box-shadow: 0 0 8px rgba(201,168,76,0.6); }
-.ndot:hover { background: var(--blush); }
-
-/* ── TOAST ── */
-.toast {
-  position: fixed; top: 28px; left: 50%; transform: translateX(-50%) translateY(-120px);
-  background: rgba(18,3,3,0.95); backdrop-filter: blur(20px);
-  border: 1px solid rgba(201,168,76,0.3); border-radius: 2px;
-  padding: 13px 26px;
-  font-family: 'Great Vibes', cursive; font-size: 1.3rem; color: var(--gold-light);
-  z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
-
-/* ── SCROLL REVEAL ── */
-.reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.9s ease, transform 0.9s ease; }
-.reveal.on { opacity: 1; transform: translateY(0); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  12% { transform: scale(1.22); }
-  24% { transform: scale(1); }
-  36% { transform: scale(1.18); }
-  48% { transform: scale(1); }
-}
-@keyframes petalFall {
-  0% { transform: translateY(-30px) rotate(0deg) translateX(0); opacity: 1; }
-  25% { transform: translateY(25vh) rotate(90deg) translateX(15px); }
-  50% { transform: translateY(50vh) rotate(180deg) translateX(-10px); }
-  75% { transform: translateY(75vh) rotate(270deg) translateX(12px); }
-  100% { transform: translateY(105vh) rotate(360deg) translateX(0); opacity: 0; }
-}
-.rose-petal {
-  position: fixed; pointer-events: none; z-index: 4;
-  animation: petalFall linear forwards;
-  user-select: none; font-size: 1.4rem;
+.letter{
+margin-top:20px;
+display:none;
+font-size:18px;
+line-height:1.6;
 }
 
-/* ── SCROLL HINT ── */
-.scroll-hint {
-  position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  opacity: 0; animation: fadeUp 1s ease 2.2s forwards;
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float linear infinite;
 }
-.scroll-hint-text {
-  font-family: 'Lora', serif; font-style: italic;
-  font-size: 0.75rem; letter-spacing: 4px; color: rgba(255,230,220,0.35); text-transform: uppercase;
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
-.scroll-chevron {
-  width: 16px; height: 16px;
-  border-right: 1px solid rgba(201,168,76,0.5);
-  border-bottom: 1px solid rgba(201,168,76,0.5);
-  transform: rotate(45deg);
-  animation: chevBounce 1.8s ease infinite;
-}
-@keyframes chevBounce {
-  0%, 100% { transform: rotate(45deg) translateY(0); }
-  50% { transform: rotate(45deg) translateY(5px); }
-}
+
 </style>
 </head>
+
 <body>
 
-<!-- CURSOR -->
-<div id="cur"></div>
-<div id="curdot"></div>
+<div class="container">
 
-<!-- CANVASES -->
-<canvas id="roseCanvas"></canvas>
-<canvas id="fireworkCanvas"></canvas>
+<h1>💖 Kỷ Niệm Tình Yêu 💖</h1>
 
-<!-- CANDLES (decorative bottom row) -->
-<div class="candle-row" id="candleRow"></div>
+<div>Bắt đầu từ <b>23 / 09 / 2022</b></div>
 
-<!-- NAV -->
-<nav class="nav-dots" id="navDots">
-  <div class="ndot active" onclick="goTo(0)" title="Trang chủ"></div>
-  <div class="ndot" onclick="goTo(1)" title="Đếm ngày"></div>
-  <div class="ndot" onclick="goTo(2)" title="Thư tình"></div>
-  <div class="ndot" onclick="goTo(3)" title="Kỷ niệm"></div>
-</nav>
+<div class="counter" id="days">0</div>
 
-<!-- MUSIC -->
-<div class="music-player">
-  <div class="music-bar" id="musicBar">
-    <div class="music-bars" id="musicBars">
-      <div class="music-bar-line"></div>
-      <div class="music-bar-line"></div>
-      <div class="music-bar-line"></div>
-      <div class="music-bar-line"></div>
-      <div class="music-bar-line"></div>
-    </div>
-    ♪ Nhạc lãng mạn
-  </div>
-  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
+<div class="time" id="time"></div>
+
+<div class="gallery">
+<img src="https://picsum.photos/200?1">
+<img src="https://picsum.photos/200?2">
+<img src="https://picsum.photos/200?3">
+<img src="https://picsum.photos/200?4">
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<button onclick="showLetter()">💌 Mở thư</button>
 
-<!-- ══════════════════════════════ SECTIONS ══════════════════════════════ -->
-
-<!-- HERO -->
-<section id="sec-hero">
-  <span class="corner-ornament tl">❧</span>
-  <span class="corner-ornament tr">❧</span>
-
-  <div style="text-align:center; position:relative; z-index:2;">
-    <div class="hero-eyebrow">— Chuyện tình của —</div>
-
-    <div style="display:flex; align-items:center; justify-content:center; gap: clamp(10px,3vw,30px); flex-wrap:wrap; margin-top:10px;">
-      <div class="hero-main">Huy</div>
-      <div>
-        <div class="hero-amp">&amp;</div>
-        <div class="big-heart">❤</div>
-      </div>
-      <div class="hero-main">Tuyền</div>
-    </div>
-
-    <div class="hero-since" id="heroSince">Kể từ · · / · · / · · · ·</div>
-
-    <div class="divider" style="justify-content:center; margin-top:30px; opacity:0; animation: fadeUp 1s ease 1.4s forwards;">
-      <div class="divider-line"></div>
-      <div class="divider-rose">🌹</div>
-      <div class="divider-line"></div>
-    </div>
-
-    <div class="hero-cta">
-      <button class="btn-classic" onclick="openModal()">✦ Đặt ngày yêu nhau ✦</button>
-      <button class="btn-classic" onclick="triggerFireworks()">✦ Bắn pháo hoa ✦</button>
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-hint-text">Cuộn xuống</div>
-    <div class="scroll-chevron"></div>
-  </div>
-</section>
-
-<!-- COUNTER -->
-<section id="sec-counter">
-  <div class="counter-wrap">
-    <div class="section-title reveal" id="cTitle">Chúng Ta Đã Bên Nhau</div>
-    <div class="divider reveal" id="cDiv" style="justify-content:center;">
-      <div class="divider-line"></div>
-      <div class="divider-rose">🌹</div>
-      <div class="divider-line"></div>
-    </div>
-    <div class="counter-grid" id="counterGrid">
-      <div class="c-box"><div class="c-num" id="cY">0</div><div class="c-lbl">Năm</div></div>
-      <div class="c-box"><div class="c-num" id="cMo">0</div><div class="c-lbl">Tháng</div></div>
-      <div class="c-box"><div class="c-num" id="cD">0</div><div class="c-lbl">Ngày</div></div>
-      <div class="c-box"><div class="c-num" id="cH">0</div><div class="c-lbl">Giờ</div></div>
-      <div class="c-box"><div class="c-num" id="cMin">0</div><div class="c-lbl">Phút</div></div>
-      <div class="c-box"><div class="c-num" id="cS">0</div><div class="c-lbl">Giây</div></div>
-    </div>
-    <div class="counter-message reveal" id="cMsg">
-      Mỗi giây trôi qua là thêm một khoảnh khắc đáng nhớ bên nhau ♡
-    </div>
-  </div>
-</section>
-
-<!-- LETTER -->
-<section id="sec-letter">
-  <div class="section-title reveal" style="margin-bottom:35px;">Thư Gửi Em Yêu</div>
-  <div class="letter-frame reveal" id="letterFrame">
-    <div class="letter-paper">
-      <div class="letter-heading">Tuyền Yêu Dấu</div>
-      <div class="letter-to">— từ người luôn ở bên em —</div>
-      <div class="letter-text">
-        <p><span class="initial">E</span>m ơi, có những ngày Huy nhìn lại và không thể tin rằng mình may mắn đến vậy — được gặp em, được ở bên em, được yêu em. Từ khoảnh khắc em bước vào cuộc đời anh, mọi thứ đều đổi thay theo một cách thật kỳ diệu.</p>
-        <p>Cảm ơn em vì những buổi sáng mà tiếng cười của em là điều đầu tiên anh muốn nghe. Cảm ơn em vì đã kiên nhẫn, vì đã hiểu anh theo cách không ai khác làm được. Mỗi ngày bên nhau là một trang sách đẹp mà anh không muốn khép lại.</p>
-        <p>Dù cuộc sống có lúc vội vàng, có lúc khó khăn — anh vẫn biết, chỉ cần có em, mọi thứ đều trở nên nhẹ nhàng hơn. Em là nhà của anh, là lý do anh muốn trở về mỗi ngày. Anh yêu em — hôm nay, ngày mai, và mãi mãi.</p>
-      </div>
-      <div class="letter-sign">Yêu em mãi mãi — Huy ♡</div>
-      <div class="letter-wax">💌</div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="sec-gallery">
-  <div class="section-title reveal" style="margin-bottom:35px;">Kỷ Niệm Đẹp Của Chúng Ta</div>
-  <div class="gallery-container">
-    <div class="gallery-stage reveal" id="galleryStage">
-      <div class="gallery-track" id="galleryTrack">
-
-        <div class="gallery-slide">
-          <div class="gallery-placeholder ph-bg-1">
-            <div class="ph-icon">🌹</div>
-            <div class="ph-label">Ảnh kỷ niệm 1<br><small style="font-family:Lora,serif;font-size:0.7rem;opacity:0.4">Thay bằng ảnh của bạn</small></div>
-          </div>
-          <div class="gallery-caption">Lần đầu gặp nhau ♡</div>
-        </div>
-
-        <div class="gallery-slide">
-          <div class="gallery-placeholder ph-bg-2">
-            <div class="ph-icon">🕯️</div>
-            <div class="ph-label">Ảnh kỷ niệm 2</div>
-          </div>
-          <div class="gallery-caption">Bữa tối lãng mạn ♡</div>
-        </div>
-
-        <div class="gallery-slide">
-          <div class="gallery-placeholder ph-bg-3">
-            <div class="ph-icon">🌸</div>
-            <div class="ph-label">Ảnh kỷ niệm 3</div>
-          </div>
-          <div class="gallery-caption">Chuyến đi đầu tiên ♡</div>
-        </div>
-
-        <div class="gallery-slide">
-          <div class="gallery-placeholder ph-bg-4">
-            <div class="ph-icon">🎂</div>
-            <div class="ph-label">Ảnh kỷ niệm 4</div>
-          </div>
-          <div class="gallery-caption">Sinh nhật ngọt ngào ♡</div>
-        </div>
-
-        <div class="gallery-slide">
-          <div class="gallery-placeholder ph-bg-5">
-            <div class="ph-icon">💐</div>
-            <div class="ph-label">Ảnh kỷ niệm 5</div>
-          </div>
-          <div class="gallery-caption">Kỷ niệm yêu nhau ♡</div>
-        </div>
-
-      </div>
-
-      <div class="gallery-nav">
-        <button class="g-btn" onclick="slide(-1)">‹</button>
-        <button class="g-btn" onclick="slide(1)">›</button>
-      </div>
-    </div>
-
-    <div class="gallery-dots" id="galleryDots"></div>
-
-    <div style="display:flex; justify-content:center; margin-top:20px;">
-      <button class="gallery-firework-btn" onclick="triggerFireworks()">
-        🎆 Bắn pháo hoa mừng kỷ niệm
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- DATE MODAL -->
-<div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:500; backdrop-filter:blur(12px); align-items:center; justify-content:center;" onclick="if(event.target===this)closeModal()">
-  <div style="background:linear-gradient(160deg,rgba(28,5,5,0.97),rgba(18,3,3,0.99)); border:1px solid rgba(201,168,76,0.3); padding:45px 35px; max-width:380px; width:90%; box-shadow:0 40px 100px rgba(0,0,0,0.6); position:relative;">
-    <div style="position:absolute;inset:8px;border:1px solid rgba(201,168,76,0.08);pointer-events:none;"></div>
-    <div style="font-family:'Great Vibes',cursive; font-size:2rem; color:var(--gold-light); text-align:center; margin-bottom:8px;">Kỷ Niệm Ngày Yêu</div>
-    <div style="font-family:'Lora',serif;font-style:italic;font-size:0.8rem;color:rgba(255,200,180,0.4);text-align:center;letter-spacing:3px;margin-bottom:28px;text-transform:uppercase;">Huy ♡ Tuyền</div>
-    <label style="font-family:'Lora',serif;font-style:italic;font-size:0.85rem;color:var(--blush);letter-spacing:2px;display:block;margin-bottom:8px;">Ngày bắt đầu yêu nhau</label>
-    <input type="date" id="modalDate" style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.25);padding:13px 16px;color:white;font-family:'Lora',serif;font-size:1rem;outline:none;color-scheme:dark;margin-bottom:22px;transition:border-color 0.3s;" onfocus="this.style.borderColor='rgba(201,168,76,0.6)'" onblur="this.style.borderColor='rgba(201,168,76,0.25)'">
-    <button onclick="applyDate()" style="width:100%;background:linear-gradient(135deg,var(--crimson),var(--rose));border:none;padding:15px;color:white;font-family:'Great Vibes',cursive;font-size:1.4rem;cursor:pointer;letter-spacing:1px;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-      Lưu kỷ niệm ♡
-    </button>
-  </div>
+<div class="letter" id="letter">
+Cảm ơn vì đã xuất hiện trong cuộc đời anh.  
+Từng ngày bên nhau đều là kỷ niệm đẹp.  
+Hy vọng chúng ta sẽ còn rất nhiều năm tháng phía trước. ❤️
 </div>
+
+</div>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b9e9f3f5.mp3">
+</audio>
 
 <script>
-// ══ STATE ══
-let startDate = new Date('2023-02-14');
-let gIdx = 0;
-const totalSlides = 5;
-let fwActive = false;
-let fwParticles = [];
-let audioCtx = null;
-let musicOn = false;
-let melodyRunning = false;
-let melodyTimeout = null;
 
-// ══ CURSOR ══
-const cur = document.getElementById('cur'), curdot = document.getElementById('curdot');
-let mx = 0, my = 0, cx = 0, cy = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animCur() {
-  cx += (mx - cx) * 0.1; cy += (my - cy) * 0.1;
-  cur.style.cssText = `left:${cx-11}px;top:${cy-11}px`;
-  curdot.style.cssText = `left:${mx-2.5}px;top:${my-2.5}px`;
-  requestAnimationFrame(animCur);
-})();
+const start = new Date("2022-09-23T00:00:00");
 
-// ══ CANDLES ══
-(function buildCandles() {
-  const row = document.getElementById('candleRow');
-  const heights = [50,80,60,90,55,75,65,85,50,70,60,80,55];
-  heights.forEach(h => {
-    row.innerHTML += `
-    <div class="candle">
-      <div class="candle-flame">
-        <div class="flame-outer"></div>
-        <div class="flame-inner"></div>
-        <div class="candle-glow"></div>
-      </div>
-      <div class="candle-wick"></div>
-      <div class="candle-body" style="height:${h}px"></div>
-    </div>`;
-  });
-})();
+function update(){
 
-// ══ ROSE PETAL CANVAS ══
-const rc = document.getElementById('roseCanvas');
-const rctx = rc.getContext('2d');
-const fwc = document.getElementById('fireworkCanvas');
-const fctx = fwc.getContext('2d');
+const now = new Date();
 
-function resizeCanvases() {
-  rc.width = fwc.width = window.innerWidth;
-  rc.height = fwc.height = window.innerHeight;
-}
-resizeCanvases();
-window.addEventListener('resize', resizeCanvases);
+let diff = now - start;
 
-// Rose petals on canvas
-const petals = [];
-const petalEmojis = ['🌹','🌸','❤️','💕','🌺','💖','🥀'];
-function spawnPetal() {
-  const size = 14 + Math.random() * 18;
-  petals.push({
-    x: Math.random() * rc.width,
-    y: -size * 2,
-    size,
-    rot: Math.random() * Math.PI * 2,
-    rotSpeed: (Math.random() - 0.5) * 0.04,
-    vy: 0.8 + Math.random() * 1.5,
-    vx: (Math.random() - 0.5) * 0.8,
-    swing: Math.random() * Math.PI * 2,
-    swingAmp: 0.3 + Math.random() * 0.5,
-    emoji: petalEmojis[Math.floor(Math.random() * petalEmojis.length)],
-    alpha: 0.5 + Math.random() * 0.5
-  });
-}
-setInterval(spawnPetal, 900);
-for (let i = 0; i < 12; i++) {
-  setTimeout(spawnPetal, i * 100);
+let days = Math.floor(diff/(1000*60*60*24));
+let hours = Math.floor(diff/(1000*60*60))%24;
+let minutes = Math.floor(diff/(1000*60))%60;
+let seconds = Math.floor(diff/1000)%60;
+
+document.getElementById("days").innerText = days + " ngày";
+
+document.getElementById("time").innerText =
+hours+" giờ "+minutes+" phút "+seconds+" giây";
+
 }
 
-function drawPetals() {
-  rctx.clearRect(0, 0, rc.width, rc.height);
-  for (let i = petals.length - 1; i >= 0; i--) {
-    const p = petals[i];
-    p.y += p.vy;
-    p.x += p.vx + Math.sin(p.swing) * p.swingAmp;
-    p.swing += 0.03;
-    p.rot += p.rotSpeed;
-    rctx.save();
-    rctx.translate(p.x, p.y);
-    rctx.rotate(p.rot);
-    rctx.globalAlpha = p.alpha;
-    rctx.font = `${p.size}px serif`;
-    rctx.textAlign = 'center';
-    rctx.textBaseline = 'middle';
-    rctx.fillText(p.emoji, 0, 0);
-    rctx.restore();
-    if (p.y > rc.height + 40) petals.splice(i, 1);
-  }
-  requestAnimationFrame(drawPetals);
-}
-drawPetals();
+setInterval(update,1000);
+update();
 
-// ══ FIREWORKS ══
-function explode(x, y) {
-  const colors = ['#8b0000','#c0392b','#e8a0a0','#f4c2c2','#c9a84c','#f0d080','#fff','#ff6b8a'];
-  for (let i = 0; i < 90; i++) {
-    const a = (Math.PI * 2 * i) / 90 + Math.random() * 0.3;
-    const spd = 1.5 + Math.random() * 6;
-    fwParticles.push({
-      x, y,
-      vx: Math.cos(a) * spd, vy: Math.sin(a) * spd,
-      alpha: 1, color: colors[Math.floor(Math.random() * colors.length)],
-      size: 1.5 + Math.random() * 3,
-      decay: 0.012 + Math.random() * 0.012,
-      trail: []
-    });
-  }
-  // heart shape burst
-  for (let t = 0; t < Math.PI * 2; t += 0.3) {
-    const scale = 5 + Math.random() * 3;
-    const hx = scale * 16 * Math.pow(Math.sin(t), 3);
-    const hy = -scale * (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-    fwParticles.push({
-      x, y, vx: hx * 0.04, vy: hy * 0.04,
-      alpha: 1, color: '#e8a0a0', size: 3, decay: 0.015, trail: []
-    });
-  }
+
+function showLetter(){
+
+const el = document.getElementById("letter");
+
+if(el.style.display=="block"){
+el.style.display="none";
+}else{
+el.style.display="block";
 }
 
-function animFW() {
-  if (!fwActive && fwParticles.length === 0) return;
-  fctx.fillStyle = 'rgba(16,3,3,0.18)';
-  fctx.fillRect(0, 0, fwc.width, fwc.height);
-  fwParticles = fwParticles.filter(p => p.alpha > 0);
-  fwParticles.forEach(p => {
-    p.trail.push({x: p.x, y: p.y, a: p.alpha});
-    if (p.trail.length > 7) p.trail.shift();
-    p.x += p.vx; p.y += p.vy;
-    p.vy += 0.06; p.vx *= 0.995;
-    p.alpha -= p.decay;
-    p.trail.forEach((t, i) => {
-      fctx.beginPath();
-      fctx.arc(t.x, t.y, p.size * (i / p.trail.length) * 0.5, 0, Math.PI * 2);
-      fctx.fillStyle = p.color;
-      fctx.globalAlpha = t.a * (i / p.trail.length) * 0.35;
-      fctx.fill();
-    });
-    fctx.beginPath();
-    fctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    fctx.fillStyle = p.color;
-    fctx.globalAlpha = p.alpha;
-    fctx.fill();
-  });
-  fctx.globalAlpha = 1;
-  requestAnimationFrame(animFW);
 }
 
-function triggerFireworks() {
-  fwActive = true;
-  fwc.style.opacity = '1';
-  const burst = [0, 350, 700, 1050, 1500, 2000, 2600];
-  burst.forEach(t => setTimeout(() => {
-    explode(
-      80 + Math.random() * (fwc.width - 160),
-      50 + Math.random() * (fwc.height * 0.55)
-    );
-  }, t));
-  animFW();
-  showToast('🎆 Chúc mừng kỷ niệm Huy & Tuyền ♡');
-  setTimeout(() => {
-    fwActive = false;
-    setTimeout(() => {
-      fctx.clearRect(0, 0, fwc.width, fwc.height);
-      fwc.style.opacity = '0';
-    }, 3000);
-  }, 4500);
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(15+Math.random()*30)+"px";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{h.remove()},6000);
+
 }
 
-// Click anywhere for small firework
-document.addEventListener('click', e => {
-  if (e.target.tagName === 'BUTTON' || e.target.closest('#modal') || e.target.closest('.music-player')) return;
-  fwc.style.opacity = '0.85';
-  explode(e.clientX, e.clientY);
-  animFW();
-  setTimeout(() => { if (fwParticles.length < 5) { fctx.clearRect(0,0,fwc.width,fwc.height); fwc.style.opacity='0'; } }, 4000);
-});
+setInterval(heart,250);
 
-// ══ COUNTER ══
-function updateCounter() {
-  const now = new Date();
-  const diff = now - startDate;
-  if (diff < 0) return;
-  const s = Math.floor(diff / 1000);
-  const min = Math.floor(s / 60);
-  const h = Math.floor(min / 60);
-  const d = Math.floor(h / 24);
-  const mo = Math.floor(d / 30.44);
-  const y = Math.floor(d / 365.25);
-  document.getElementById('cY').textContent = y;
-  document.getElementById('cMo').textContent = mo % 12;
-  document.getElementById('cD').textContent = d % 30;
-  document.getElementById('cH').textContent = h % 24;
-  document.getElementById('cMin').textContent = min % 60;
-  document.getElementById('cS').textContent = s % 60;
-}
-updateCounter();
-setInterval(updateCounter, 1000);
-
-// ══ GALLERY ══
-const gDots = document.getElementById('galleryDots');
-for (let i = 0; i < totalSlides; i++) {
-  const d = document.createElement('div');
-  d.className = 'g-dot' + (i === 0 ? ' active' : '');
-  d.onclick = () => goSlide(i);
-  gDots.appendChild(d);
-}
-
-function goSlide(n) {
-  gIdx = Math.max(0, Math.min(n, totalSlides - 1));
-  document.getElementById('galleryTrack').style.transform = `translateX(-${gIdx * 100}%)`;
-  document.querySelectorAll('.g-dot').forEach((d, i) => d.classList.toggle('active', i === gIdx));
-}
-function slide(dir) { goSlide(gIdx + dir); }
-
-// Auto-advance
-setInterval(() => { if (gIdx < totalSlides - 1) goSlide(gIdx + 1); else goSlide(0); }, 5000);
-
-// ══ MUSIC ══
-const notes = [
-  {f:329.63,d:0.6},{f:293.66,d:0.4},{f:261.63,d:0.6},{f:293.66,d:0.4},
-  {f:329.63,d:0.8},{f:329.63,d:0.4},{f:329.63,d:0.4},
-  {f:293.66,d:0.6},{f:293.66,d:0.4},{f:293.66,d:0.9},
-  {f:329.63,d:0.5},{f:392.00,d:0.5},{f:392.00,d:0.9},
-  {f:329.63,d:0.6},{f:293.66,d:0.4},{f:261.63,d:0.6},{f:293.66,d:0.4},
-  {f:329.63,d:0.9},{f:329.63,d:0.4},
-  {f:293.66,d:0.5},{f:293.66,d:0.4},{f:329.63,d:0.4},{f:293.66,d:0.4},
-  {f:261.63,d:1.6}
-];
-
-function playNote(idx) {
-  if (!melodyRunning || !audioCtx) return;
-  const n = notes[idx % notes.length];
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  const reverb = audioCtx.createConvolver();
-  const filter = audioCtx.createBiquadFilter();
-  filter.type = 'lowpass'; filter.frequency.value = 1800;
-  filter.Q.value = 0.5;
-  osc.type = 'sine';
-  osc.frequency.value = n.f;
-  const t = audioCtx.currentTime;
-  gain.gain.setValueAtTime(0, t);
-  gain.gain.linearRampToValueAtTime(0.14, t + 0.04);
-  gain.gain.setValueAtTime(0.12, t + n.d - 0.1);
-  gain.gain.linearRampToValueAtTime(0, t + n.d);
-  osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-  // Harmony note (a third below)
-  const osc2 = audioCtx.createOscillator();
-  const gain2 = audioCtx.createGain();
-  osc2.type = 'sine'; osc2.frequency.value = n.f * 0.794;
-  gain2.gain.setValueAtTime(0, t);
-  gain2.gain.linearRampToValueAtTime(0.05, t + 0.06);
-  gain2.gain.linearRampToValueAtTime(0, t + n.d * 0.7);
-  osc2.connect(gain2); gain2.connect(audioCtx.destination);
-  osc.start(t); osc.stop(t + n.d + 0.1);
-  osc2.start(t); osc2.stop(t + n.d + 0.1);
-  melodyTimeout = setTimeout(() => playNote(idx + 1), n.d * 1000 + 60);
-}
-
-function toggleMusic() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  musicOn = !musicOn;
-  const btn = document.getElementById('musicBtn');
-  const bar = document.getElementById('musicBar');
-  const bars = document.getElementById('musicBars');
-  if (musicOn) {
-    btn.classList.add('on'); btn.textContent = '♫';
-    bar.classList.add('show');
-    bars.style.display = 'flex';
-    melodyRunning = true;
-    playNote(0);
-    showToast('♪ Nhạc tình đang phát...');
-  } else {
-    btn.classList.remove('on'); btn.textContent = '♪';
-    bar.classList.remove('show');
-    bars.style.display = 'none';
-    melodyRunning = false;
-    if (melodyTimeout) clearTimeout(melodyTimeout);
-    showToast('Nhạc đã tắt');
-  }
-}
-
-// ══ MODAL ══
-function openModal() {
-  const m = document.getElementById('modal');
-  m.style.display = 'flex';
-  const d = startDate;
-  document.getElementById('modalDate').value =
-    d.getFullYear()+'-'+(d.getMonth()+1).toString().padStart(2,'0')+'-'+d.getDate().toString().padStart(2,'0');
-}
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
-function applyDate() {
-  const v = document.getElementById('modalDate').value;
-  if (!v) return;
-  startDate = new Date(v);
-  const fd = startDate.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
-  document.getElementById('heroSince').textContent = `Kể từ ngày ${fd}`;
-  updateCounter();
-  closeModal();
-  showToast(`❤ Huy & Tuyền yêu nhau từ ${fd}`);
-  triggerFireworks();
-}
-
-// ══ NAV ══
-const secs = ['sec-hero','sec-counter','sec-letter','sec-gallery'];
-function goTo(i) { document.getElementById(secs[i]).scrollIntoView({behavior:'smooth'}); }
-const ndots = document.querySelectorAll('.ndot');
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const i = secs.indexOf(e.target.id);
-      if (i >= 0) { ndots.forEach(d => d.classList.remove('active')); ndots[i].classList.add('active'); }
-    }
-  });
-}, {threshold: 0.4});
-secs.forEach(id => obs.observe(document.getElementById(id)));
-
-// ══ SCROLL REVEAL ══
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('on');
-      if (e.target.id === 'counterGrid') {
-        e.target.querySelectorAll('.c-box').forEach((b, i) =>
-          setTimeout(() => { b.style.opacity='1'; b.style.transform='translateY(0)'; }, i * 100));
-      }
-    }
-  });
-}, {threshold: 0.2});
-document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
-
-// ══ TOAST ══
-let toastT;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(toastT);
-  toastT = setTimeout(() => t.classList.remove('show'), 3200);
-}
-
-// ══ KEYBOARD NAV ══
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') slide(-1);
-  if (e.key === 'ArrowRight') slide(1);
-  if (e.key === 'm' || e.key === 'M') toggleMusic();
-});
 </script>
+
 </body>
 </html>
+```
